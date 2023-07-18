@@ -1,50 +1,64 @@
 const express = require("express");
-const cors = require("cors");
+const passport = require("passport");
+const strategy = require("../auth/LocalStrategy");
+const serial = require("../auth/index");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const userModel = require("../model/user");
 
-router.post("/register", cors(), async (req, res) => {
+passport.use(strategy);
+
+router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    const userId = await userModel.createUser(username, hash);
-    res.status(201).send(userId);
+    const id = await userModel.createUser(username, hash);
+    userId = id[0];
+    userInfo = {
+      username: username,
+      userId: userId.id,
+    };
+    req.logIn(username, function (err) {
+      if (err) {
+        return next(err);
+      }
+      req.session.passport.user.username = userInfo.username;
+      req.session.passport.user.id = userInfo.userId;
+      return req.session;
+    });
+    console.log(req.session);
+    res.status(201).send(userInfo);
   } catch (err) {
     console.error(err);
     res.status(400).send("Please check that the information is correct");
   }
 }),
-  router.post("/login", cors(), async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      if (username === "testuser" && password === "test") {
-        res.status(200).send(["testuser", 1]);
-        return;
-      }
-      userInfo = await userModel.getUser(username);
-
-      if (userInfo) {
-        const match = await bcrypt.compare(password, userInfo[0].password);
-        if (match) {
-          res.status(200).send([userInfo[0].username, userInfo[0].id]);
-          return;
-        } else {
-          res.send("Please try again");
+  router.post(
+    "/login",
+    passport.authenticate("local", { failureMessage: true }),
+    async (req, res) => {
+      try {
+        const { username, password } = req.body;
+        if (username === "testuser" && password === "test") {
+          res.status(200).send(["testuser", 1]);
           return;
         }
-      } else {
-        res.status(404).send("user not found");
+
+        const userInfo = await userModel.getUser(username);
+        req.session.passport.user.id = userInfo[0].id;
+        req.session.passport.user.username = userInfo[0].username;
+        const user = { userId: userInfo[0].id, username: userInfo[0].username };
+        console.log(req.session);
+        res.status(200).send(user);
+      } catch (err) {
+        console.error(err);
+        res
+          .status(404)
+          .send(
+            "Please check that your username and password are entered correctly"
+          );
       }
-      res.status(200).send([userInfo[0].username, userInfo[0].id]);
-    } catch (err) {
-      console.error(err);
-      res
-        .status(404)
-        .send(
-          "Please check that your username and password are entered correctly"
-        );
     }
-  });
+  );
 
 module.exports = router;
