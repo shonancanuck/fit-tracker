@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "migrate": "knex migrate:latest",
+    "make-migration": "knex migrate:make",
     "seed": "knex seed:run",
     "build": "npm install && run migrate",
     "start": "node src/server.js"

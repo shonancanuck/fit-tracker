@@ -39,10 +39,10 @@ router.post("/register", async (req, res) => {
     async (req, res) => {
       try {
         const { username, password } = req.body;
-        if (username === "testuser" && password === "test") {
-          res.status(200).send(["testuser", 1]);
-          return;
-        }
+        // if (username === "testuser" && password === "test") {
+        //   res.status(200).send(["testuser", 1]);
+        //   return;
+        // }
 
         const userInfo = await userModel.getUser(username);
         req.session.passport.user.id = userInfo[0].id;

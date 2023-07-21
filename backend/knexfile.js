@@ -9,12 +9,14 @@ module.exports = {
     connection: {
       database: process.env.POSTGRES_DB,
       user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      port: process.env.POSTGRES_PORT,
     },
     migrations: {
-      directory: "./db/migrations",
+      directory: "./db/data/migrations",
     },
     seeds: {
-      directory: "./db/seeds",
+      directory: "./db/data/seeds",
     },
   },
 
@@ -22,10 +24,10 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: "./db/migrations",
+      directory: "./db/data/migrations",
     },
     seeds: {
-      directory: "./db/seeds",
+      directory: "./db/data/seeds",
     },
   },
 };
