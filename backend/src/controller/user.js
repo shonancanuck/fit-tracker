@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
     userInfo = {
       username: username,
       userId: userId.id,
+      loggedIn: true,
     };
     req.logIn(username, function (err) {
       if (err) {
@@ -39,15 +40,15 @@ router.post("/register", async (req, res) => {
     async (req, res) => {
       try {
         const { username, password } = req.body;
-        // if (username === "testuser" && password === "test") {
-        //   res.status(200).send(["testuser", 1]);
-        //   return;
-        // }
 
         const userInfo = await userModel.getUser(username);
         req.session.passport.user.id = userInfo[0].id;
         req.session.passport.user.username = userInfo[0].username;
-        const user = { userId: userInfo[0].id, username: userInfo[0].username };
+        const user = {
+          userId: userInfo[0].id,
+          username: userInfo[0].username,
+          loggedIn: true,
+        };
         console.log(req.session);
         res.status(200).send(user);
       } catch (err) {
