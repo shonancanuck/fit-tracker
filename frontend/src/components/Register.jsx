@@ -1,12 +1,9 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 
-export default function Register() {
-  const [password, setPassword] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [isRegistered, setIsRegistered] = useState(false);
-
-  const handleRegistration = () => setIsRegistered(true);
+export default function Register({ toggleLogReg, setLoggedIn }) {
+  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState(0);
+  const [username, setUsername] = useState("");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,19 +16,23 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(username, password);
       const response = await fetch("http://localhost:3001/user/register", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
-
+      console.log(response);
       if (response.ok) {
         console.log("Registration successful!");
         const userInfo = await response.json();
         console.log(userInfo);
         setUserId(userInfo.id);
+        setUsername(userInfo.username);
+        setLoggedIn(true);
       } else {
         console.log(response);
         console.log("Registration unsuccessful");
@@ -67,7 +68,9 @@ export default function Register() {
         </div>
         <input type="submit" />
       </form>
-      <h4>Already have an account?</h4>
+      <p>
+        Already have an account? <span onClick={toggleLogReg}>Log in</span>
+      </p>
     </div>
   );
 }

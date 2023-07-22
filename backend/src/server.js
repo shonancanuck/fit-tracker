@@ -5,7 +5,7 @@ const session = require("express-session");
 const passport = require("passport");
 
 const allowedOrigins = ["http://localhost:3000"];
-const allowedMethods = ["GET", "POST"];
+const allowedMethods = ["GET", "POST", "PATCH", "DELETE"];
 const PORT = process.env.PORT || 3001;
 
 // Routes
@@ -18,7 +18,13 @@ app.use(express.json());
 app.use(
   cors({ origin: allowedOrigins, methods: allowedMethods, credentials: true })
 );
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", express.static("public"));

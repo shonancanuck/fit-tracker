@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
-export default function Login() {
-  const [password, setPassword] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [userId, setUserId] = useState(null);
-
-  // const handleRegistration = () => setIsRegistered(true);
+export default function Login({ toggleLogReg, setLoggedIn }) {
+  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState(0);
+  const [username, setUsername] = useState("");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -18,6 +16,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit login");
+    console.log(username, userId, password);
     try {
       const response = await fetch("http://localhost:3001/user/login", {
         method: "POST",
@@ -32,6 +31,8 @@ export default function Login() {
         const userInfo = await response.json();
         console.log(userInfo);
         setUserId(userInfo.userId);
+        setUsername(userInfo.username);
+        setLoggedIn(true);
       } else {
         console.log(response);
         console.log("Login unsuccessful");
@@ -67,6 +68,9 @@ export default function Login() {
         </div>
         <input type="submit" />
       </form>
+      <p>
+        Need an account? <span onClick={toggleLogReg}>Register</span>
+      </p>
     </div>
   );
 }
