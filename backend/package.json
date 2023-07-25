@@ -18,6 +18,7 @@
     "migrate": "knex migrate:latest",
     "make-migration": "knex migrate:make",
     "seed": "knex seed:run",
+    "seed-make": "knex seed:make",
     "build": "npm install && run migrate",
     "start": "node src/server.js"
   }
