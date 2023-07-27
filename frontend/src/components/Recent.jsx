@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function Recent() {
-  const { userId, username } = useContext(UserContext);
+  const { userId } = useContext(UserContext);
   const [workoutData, setWorkoutData] = useState([]);
   const [lastWorkout, setLastWorkout] = useState([]);
 
   useEffect(() => {
     getRecentHistory();
     setLastWorkout(() => displayData);
-  }, []);
+  }, [workoutData]);
 
   const getRecentHistory = async () => {
     const recentData = await fetch(
@@ -19,26 +19,24 @@ export default function Recent() {
     setWorkoutData(() => recentHistory);
   };
 
-  const displayData =
-    workoutData &&
-    workoutData.map((ex) => {
-      return (
-        <>
-          <li
-            key={ex["exercise_name"]}
-            exerciseid={ex["exercise_id"]}
-            className="mainlist"
-          >
-            {ex["exercise_name"]}
-            <ul className="sublist">
-              <li>weight: {ex.weight}</li>
-              <li>reps: {ex.reps}</li>
-              <li>sets: {ex.sets}</li>
-            </ul>
-          </li>
-        </>
-      );
-    });
+  const displayData = workoutData.map((ex) => {
+    return (
+      <>
+        <li
+          key={ex["exercise_name"]}
+          exerciseid={ex["exercise_id"]}
+          className="mainlist"
+        >
+          {ex["exercise_name"]}
+          <ul className="sublist">
+            <li key={ex["exercise_name"] + "weight"}>weight: {ex.weight}</li>
+            <li key={ex["exercise_name"] + "reps"}>reps: {ex.reps}</li>
+            <li key={ex["exercise_name"] + "sets"}>sets: {ex.sets}</li>
+          </ul>
+        </li>
+      </>
+    );
+  });
 
   return (
     <>
