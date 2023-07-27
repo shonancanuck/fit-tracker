@@ -1,5 +1,12 @@
 import React from "react";
+import Navbar from "./Navbar";
+import Recent from "./Recent";
 
 export default function Dashboard() {
-  return <h1>Logged In!</h1>;
+  return (
+    <>
+      <Navbar />
+      <Recent />
+    </>
+  );
 }

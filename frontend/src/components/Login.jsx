@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function Login({ toggleLogReg, setLoggedIn }) {
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState(0);
-  const [username, setUsername] = useState("");
+  const { userId, setUserId, username, setUsername } = useContext(UserContext);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -16,7 +16,7 @@ export default function Login({ toggleLogReg, setLoggedIn }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit login");
-    console.log(username, userId, password);
+    console.log(username, userId);
     try {
       const response = await fetch("http://localhost:3001/user/login", {
         method: "POST",
@@ -28,6 +28,7 @@ export default function Login({ toggleLogReg, setLoggedIn }) {
       });
       if (response.ok) {
         console.log("Login successful!");
+        console.log(response);
         const userInfo = await response.json();
         console.log(userInfo);
         setUserId(userInfo.userId);

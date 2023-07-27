@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function Register({ toggleLogReg, setLoggedIn }) {
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState(0);
-  const [username, setUsername] = useState("");
+  const { userId, setUserId, username, setUsername } = useContext(UserContext);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);

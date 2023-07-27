@@ -13,6 +13,7 @@ module.exports = {
 
   getMostRecentExercises(userId) {
     return knex("history")
+      .join("exercise", { "history.exercise_id": "exercise.exercise_id" })
       .where("user_id", userId)
       .orderBy("date", "desc")
       .select()
