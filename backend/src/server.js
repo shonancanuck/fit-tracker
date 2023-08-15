@@ -1,7 +1,10 @@
 const express = require("express");
 // const path = require("path");
 const cors = require("cors");
+const knex = require("../db/knex");
 const session = require("express-session");
+const KnexSessionStore = require("connect-session-knex")(session);
+const store = new KnexSessionStore({ knex });
 const passport = require("passport");
 
 const allowedOrigins = ["http://localhost:3000"];
@@ -23,6 +26,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    store: store,
   })
 );
 app.use(passport.initialize());
