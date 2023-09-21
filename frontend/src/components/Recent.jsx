@@ -13,7 +13,7 @@ export default function Recent() {
 
   const getRecentHistory = async () => {
     const recentData = await fetch(
-      `http://localhost:3001/user/history/recent/${userId}`
+      `http://localhost:3001/history/recent/${userId}`
     );
     const recentHistory = await recentData.json();
     setWorkoutData(() => recentHistory);
