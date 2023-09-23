@@ -15,7 +15,7 @@ export default function Recent() {
     const recentData = await fetch(
       `http://localhost:3001/history/recent/user/${userId}`
     );
-    console.log(recentData);
+    // console.log(recentData);
     const recentHistory = await recentData.json();
     console.log(recentHistory);
     setWorkoutData(() => recentHistory);
@@ -43,7 +43,7 @@ export default function Recent() {
   return (
     <>
       <h3>Most recent workout:</h3>
-      <ul>{lastWorkout}</ul>
+      <ul>{displayData}</ul>
     </>
   );
 }

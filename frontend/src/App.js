@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import Home from "./components/Home";
 import UserContext from "./contexts/UserContext";
 import {
   createBrowserRouter,
@@ -14,7 +14,7 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" index element={<Dashboard />} />
+      <Route path="/" index element={<Home />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
     </Route>

@@ -36,18 +36,18 @@ export default function History() {
     console.log(selectedHistory);
   };
 
-  // const getHistory = async () => {
-  //   try {
-  //     const historyData =
-  //       await fetch(`http://localhost:3001/user/history/${userId}/
-  //     ${selectedHistory["exercise_id"]}`);
-  //     const exHistory = await historyData.json();
-  //     setExtendedHistory(exHistory);
-  //     console.log(extendedHistory);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const getHistory = async () => {
+    try {
+      const historyData =
+        await fetch(`http://localhost:3001/history/extended/${userId}/
+      ${selectedHistory["exercise_id"]}`);
+      const exHistory = await historyData.json();
+      setExtendedHistory(exHistory);
+      console.log(extendedHistory);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
       <ul>

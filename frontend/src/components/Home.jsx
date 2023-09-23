@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-import Register from "./Register";
-import Login from "./Login";
+import React, { useState, useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import { Navigate } from "react-router-dom";
+
+import Navbar from "./Navbar";
 import Dashboard from "./Dashboard";
 
 export default function Home() {
-  const [logReg, setLogReg] = useState("log");
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const toggleLogReg = () => {
-    if (logReg === "log") {
-      setLogReg("reg");
-    } else if (logReg === "reg") {
-      setLogReg("log");
-    }
-  };
-  return loggedIn ? (
-    <Dashboard />
-  ) : (
-    <>
-      {logReg === "reg" && (
-        <Register
-          toggleLogReg={toggleLogReg}
-          setLoggedIn={() => setLoggedIn(true)}
-        />
-      )}
-      {logReg === "log" && (
-        <Login
-          toggleLogReg={toggleLogReg}
-          setLoggedIn={() => setLoggedIn(true)}
-        />
-      )}
-    </>
-  );
+  const { userId, setUserId, username, setUsername, loggedIn, setLoggedIn } =
+    useContext(UserContext);
+  if (!loggedIn) {
+    return <Navigate replace to="/login" />;
+  } else {
+    return (
+      <>
+        <Navbar />
+        <Dashboard />
+      </>
+    );
+  }
 }
