@@ -35,7 +35,7 @@ app.use("/", express.static("public"));
 
 app.use("/exercise", exercise);
 app.use("/user", user);
-app.use("/user/history", userHistory);
+app.use("/history", userHistory);
 
 app.get("/", (req, res) => res.send("Hello!"));
 
