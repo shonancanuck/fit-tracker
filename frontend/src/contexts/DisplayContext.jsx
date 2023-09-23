@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const DisplayContext = createContext({
-  display: "home",
+  display: "",
   setDisplay: () => {},
 });
 

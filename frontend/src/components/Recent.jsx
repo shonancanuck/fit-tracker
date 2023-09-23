@@ -15,7 +15,6 @@ export default function Recent() {
     const recentData = await fetch(
       `http://localhost:3001/history/recent/user/${userId}`
     );
-    // console.log(recentData);
     const recentHistory = await recentData.json();
     console.log(recentHistory);
     setWorkoutData(() => recentHistory);

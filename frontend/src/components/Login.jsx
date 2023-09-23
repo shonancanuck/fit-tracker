@@ -73,9 +73,9 @@ export default function Login() {
         </div>
         <input type="submit" />
       </form>
+
       <p>
-        Need an account?
-        <Link to="/register">Register</Link>
+        Need an account? <Link to="/register">Register</Link>
       </p>
     </div>
   );
