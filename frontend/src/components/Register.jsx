@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function Register({ toggleLogReg, setLoggedIn }) {
+export default function Register() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
-  const { userId, setUserId, username, setUsername } = useContext(UserContext);
+  const { userId, setUserId, username, setUsername, loggedIn, setLoggedIn } =
+    useContext(UserContext);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -33,6 +36,7 @@ export default function Register({ toggleLogReg, setLoggedIn }) {
         setUserId(userInfo.id);
         setUsername(userInfo.username);
         setLoggedIn(true);
+        navigate("/");
       } else {
         console.log(response);
         console.log("Registration unsuccessful");
@@ -69,7 +73,8 @@ export default function Register({ toggleLogReg, setLoggedIn }) {
         <input type="submit" />
       </form>
       <p>
-        Already have an account? <span onClick={toggleLogReg}>Log in</span>
+        Already have an account?
+        <Link to="/login">Log in</Link>
       </p>
     </div>
   );

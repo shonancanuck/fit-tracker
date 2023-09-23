@@ -9,13 +9,15 @@ export default function Recent() {
   useEffect(() => {
     getRecentHistory();
     setLastWorkout(() => displayData);
-  }, [workoutData]);
+  }, []);
 
   const getRecentHistory = async () => {
     const recentData = await fetch(
       `http://localhost:3001/history/recent/${userId}`
     );
+    console.log(recentData);
     const recentHistory = await recentData.json();
+    console.log(recentHistory);
     setWorkoutData(() => recentHistory);
   };
 

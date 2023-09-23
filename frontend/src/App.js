@@ -1,14 +1,42 @@
 import { useState } from "react";
 import "./App.css";
-import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
 import UserContext from "./contexts/UserContext";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" index element={<Dashboard />} />
+      <Route path="register" element={<Register />} />
+      <Route path="login" element={<Login />} />
+    </Route>
+  )
+);
 
 function App() {
   const [userId, setUserId] = useState(0);
   const [username, setUsername] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
-    <UserContext.Provider value={{ userId, setUserId, username, setUsername }}>
-      <Home />
+    <UserContext.Provider
+      value={{
+        userId,
+        setUserId,
+        username,
+        setUsername,
+        loggedIn,
+        setLoggedIn,
+      }}
+    >
+      <RouterProvider router={router} />
     </UserContext.Provider>
   );
 }
