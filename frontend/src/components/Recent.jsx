@@ -13,7 +13,7 @@ export default function Recent() {
 
   const getRecentHistory = async () => {
     const recentData = await fetch(
-      `http://localhost:3001/history/recent/${userId}`
+      `http://localhost:3001/history/recent/user/${userId}`
     );
     console.log(recentData);
     const recentHistory = await recentData.json();
