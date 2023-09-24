@@ -18,20 +18,40 @@ export default function Navbar() {
   return (
     <header>
       <div>
-        <h3>FitTracker</h3>
-        {new Date().toDateString()}
-        {username}
+        <h3 className="title">
+          Fit <br />
+          Tracker
+        </h3>
       </div>
-
-      <nav>
-        <ul>
-          <li onClick={handleHome}>Home</li>
-          <li onClick={() => changeDisplay("recent")}>Recent</li>
-          <li onClick={() => changeDisplay("today")}>Today</li>
-          <li onClick={() => changeDisplay("history")}> History</li>
-        </ul>
-      </nav>
-      <button onClick={handleLogout}>Log out</button>
+      <div>
+        <nav>
+          <ul>
+            <li className="navbar-link" onClick={handleHome}>
+              Home
+            </li>
+            <li className="navbar-link" onClick={() => changeDisplay("recent")}>
+              Recent
+            </li>
+            <li className="navbar-link" onClick={() => changeDisplay("today")}>
+              Today
+            </li>
+            <li
+              className="navbar-link"
+              onClick={() => changeDisplay("history")}
+            >
+              {" "}
+              History
+            </li>
+            <li className="navbar-link" onClick={handleLogout}>
+              Log out
+            </li>
+          </ul>
+        </nav>
+        {/* <div>
+          {new Date().toDateString()}
+          {username}
+        </div> */}
+      </div>
     </header>
     //   <h3>FitTracker</h3>
     //   <h5>{new Date().toDateString()}</h5>

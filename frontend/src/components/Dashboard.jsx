@@ -18,11 +18,15 @@ export default function Dashboard() {
 
   if (display === "home") {
     return (
-      <ul>
-        <li onClick={() => changeDisplay("recent")}>recent</li>
-        <li onClick={() => changeDisplay("today")}>today</li>
-        <li onClick={() => changeDisplay("history")}>history</li>
-      </ul>
+      <main>
+        <ul>
+          <li onClick={() => changeDisplay("recent")}>
+            My Most Recent Workout
+          </li>
+          <li onClick={() => changeDisplay("today")}>Record Today's Workout</li>
+          <li onClick={() => changeDisplay("history")}>Check My Progress</li>
+        </ul>
+      </main>
     );
   } else if (display === "recent") {
     console.log(display);
