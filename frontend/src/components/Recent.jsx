@@ -28,7 +28,7 @@ export default function Recent() {
           exerciseid={ex["exercise_id"]}
           className="mainlist"
         >
-          {ex["exercise_name"]}
+          {ex["exercise_name"].toUpperCase()}
           <ul className="sublist">
             <li key={ex["exercise_name"] + "weight"}>weight: {ex.weight}</li>
             <li key={ex["exercise_name"] + "reps"}>reps: {ex.reps}</li>
@@ -42,7 +42,9 @@ export default function Recent() {
   return (
     <>
       <h3>Most recent workout:</h3>
-      <ul>{displayData}</ul>
+      <main>
+        <ul>{displayData}</ul>
+      </main>
     </>
   );
 }

@@ -7,13 +7,14 @@
 header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   background-color: rgb(0, 115, 255);
   overflow: auto;
 }
 
 nav {
-  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .navbar-link {
@@ -43,11 +44,25 @@ main > ul {
 }
 
 main > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   list-style: none;
-  padding: 3em;
-  max-width: 200px;
+  width: 200px;
+  height: 180px;
+  padding: 2rem;
   border: solid rgb(0, 115, 255) 4px;
   background-color: ghostwhite;
   color: rgb(0, 115, 255);
   border-radius: 12px;
+}
+
+.mainlist {
+  font-size: 1.2rem;
+}
+
+.sublist > li {
+  list-style: none;
 }

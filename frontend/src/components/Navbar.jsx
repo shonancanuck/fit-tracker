@@ -19,8 +19,8 @@ export default function Navbar() {
     <header>
       <div>
         <h3 className="title">
-          Fit <br />
-          Tracker
+          FIT <br />
+          TRACKER
         </h3>
       </div>
       <div>
