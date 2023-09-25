@@ -74,7 +74,18 @@ export default function History() {
   } else {
     return (
       <>
+        <h3>{selectedHistory["exercise_name"].toUpperCase()}</h3>
         <p onClick={handleUnselection}>back</p>
+        <main>
+          <ul>
+            {displayHistory.map((entry) => (
+              <li key={entry.date}>
+                {new Date(entry.date).toDateString()} reps:
+                {entry.reps} sets: {entry.sets} weight: {entry.weight}
+              </li>
+            ))}
+          </ul>
+        </main>
       </>
     );
   }
