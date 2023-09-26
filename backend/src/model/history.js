@@ -21,4 +21,17 @@ module.exports = {
       .select()
       .limit(6);
   },
+
+  postToHistory(infoSet) {
+    return knex("history")
+      .insert(infoSet)
+      .returning([
+        "user_id",
+        "exercise_id",
+        "reps",
+        "sets",
+        "weight",
+        "difficulty",
+      ]);
+  },
 };

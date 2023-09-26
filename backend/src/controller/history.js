@@ -31,4 +31,17 @@ router.get("/recent/user/:userId", cors(), async (req, res) => {
   }
 });
 
+router.post("/", cors(), async (req, res) => {
+  try {
+    console.log("request to post workout info");
+    console.log(req.body);
+    const infoSet = req.body;
+    const result = await model.postToHistory(infoSet);
+    res.status(201).send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send("Something went wrong");
+  }
+});
+
 module.exports = router;
