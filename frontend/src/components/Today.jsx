@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import InfoSubmit from "./InfoSubmit";
 
 export default function Today() {
   const [exerciseList, setExerciseList] = useState([]);
@@ -37,21 +38,34 @@ export default function Today() {
 
   return (
     <>
-      <h3>Today's workout</h3>
-      <main>
-        <p onClick={handleUnselection}>back</p>
-        <ul>
-          {exerciseList.map((ex, index) => (
-            <li
-              key={ex["exercise_name"]}
-              className={ex["exercise_name"]}
-              onClick={handleSelection}
-            >
-              {ex["exercise_name"]}
-            </li>
-          ))}
-        </ul>
-      </main>
+      <>
+        {selectedExercise ? (
+          <>
+            <h4>{selectedExercise["exercise_name"].toUpperCase()}</h4>
+            <InfoSubmit />
+            <p onClick={handleUnselection}>back</p>
+          </>
+        ) : (
+          <></>
+        )}
+      </>
+      <>
+        <h3>Today's workout</h3>
+        <main>
+          <p onClick={handleUnselection}>back</p>
+          <ul>
+            {exerciseList.map((ex, index) => (
+              <li
+                key={ex["exercise_name"]}
+                className={ex["exercise_name"]}
+                onClick={handleSelection}
+              >
+                {ex["exercise_name"]}
+              </li>
+            ))}
+          </ul>
+        </main>
+      </>
     </>
   );
 }
