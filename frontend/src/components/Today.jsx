@@ -7,12 +7,6 @@ export default function Today() {
   const { todaysWorkout, setTodaysWorkout } = useContext(WorkoutContext);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("set workout");
-  //   setTodaysWorkout(createBaseWorkout);
-  //   console.log(todaysWorkout);
-  // }, []);
-
   useEffect(() => {
     console.log("today's workout: ", todaysWorkout);
   }, []);
@@ -20,17 +14,6 @@ export default function Today() {
   useEffect(() => {
     console.log(selectedExercise);
   }, [selectedExercise]);
-
-  // const createBaseWorkout = () =>
-  //   exerciseList.map((ex) => {
-  //     return {
-  //       exName: ex["exercise_name"],
-  //       exId: ex["exercise_id"],
-  //       reps: 0,
-  //       sets: 0,
-  //       weight: 0,
-  //     };
-  //   });
 
   const handleSelection = (e) => {
     const selection = exerciseList.find(
