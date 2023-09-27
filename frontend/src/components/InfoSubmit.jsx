@@ -2,7 +2,7 @@ import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import WorkoutContext from "../contexts/WorkoutContext";
 
-export default function InfoSubmit({ currentSelection, unselect }) {
+export default function InfoSubmit({ selectedExercise, handleUnselection }) {
   const { userId } = useContext(UserContext);
   const { todaysWorkout, setTodaysWorkout } = useContext(WorkoutContext);
 
@@ -11,7 +11,7 @@ export default function InfoSubmit({ currentSelection, unselect }) {
 
     const infoSet = {
       user_id: userId,
-      exercise_id: currentSelection["exercise_id"],
+      exercise_id: selectedExercise["exercise_id"],
       date: new Date(),
       weight: e.target.weight.value,
       reps: e.target.reps.value,
@@ -46,6 +46,7 @@ export default function InfoSubmit({ currentSelection, unselect }) {
             }
             return obj;
           });
+          updatedWorkout.sort((a, b) => a.exId - b.exId);
           setTodaysWorkout(updatedWorkout);
         };
         updateTodaysWorkout();
@@ -54,11 +55,12 @@ export default function InfoSubmit({ currentSelection, unselect }) {
       console.error(err);
     }
     console.log(todaysWorkout);
-    unselect();
+    handleUnselection();
   };
 
   return (
     <>
+      <h3>{selectedExercise["exercise_name"].toUpperCase()}</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="weight">weight</label>
         <input type="number" name="weight" />

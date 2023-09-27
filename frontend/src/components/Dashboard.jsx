@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import DisplayContext from "../contexts/DisplayContext";
 import ExerciseContext from "../contexts/ExerciseContext";
+import WorkoutContext from "../contexts/WorkoutContext";
+
 import Recent from "./Recent";
 import History from "./History";
-import Today from "./Today";
-import WorkoutContext from "../contexts/WorkoutContext";
+import CurrentWorkout from "./CurrentWorkout";
 
 export default function Dashboard() {
   const { display, setDisplay } = useContext(DisplayContext);
@@ -33,13 +34,16 @@ export default function Dashboard() {
   };
 
   if (display === "home") {
+    console.log("home");
     return (
       <main>
         <ul>
           <li onClick={() => changeDisplay("recent")}>
             My Most Recent Workout
           </li>
-          <li onClick={() => changeDisplay("today")}>Record Today's Workout</li>
+          <li onClick={() => changeDisplay("current")}>
+            Record Today's Workout
+          </li>
           <li onClick={() => changeDisplay("history")}>Check My Progress</li>
         </ul>
       </main>
@@ -47,11 +51,11 @@ export default function Dashboard() {
   } else if (display === "recent") {
     console.log(display);
     return <Recent />;
-  } else if (display === "today") {
+  } else if (display === "current") {
     console.log(display);
     return (
       <WorkoutContext.Provider value={{ todaysWorkout, setTodaysWorkout }}>
-        <Today />
+        <CurrentWorkout />
       </WorkoutContext.Provider>
     );
   } else if (display === "history") {

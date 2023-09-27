@@ -33,8 +33,11 @@ export default function Navbar() {
             <li className="navbar-link" onClick={() => changeDisplay("recent")}>
               Recent
             </li>
-            <li className="navbar-link" onClick={() => changeDisplay("today")}>
-              Today
+            <li
+              className="navbar-link"
+              onClick={() => changeDisplay("current")}
+            >
+              Current
             </li>
             <li
               className="navbar-link"
