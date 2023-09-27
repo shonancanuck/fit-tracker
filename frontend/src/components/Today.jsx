@@ -1,29 +1,33 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import InfoSubmit from "./InfoSubmit";
+import ExerciseContext from "../contexts/ExerciseContext";
 
 export default function Today() {
-  const [exerciseList, setExerciseList] = useState([]);
+  const { exerciseList } = useContext(ExerciseContext);
+  // const [todaysWorkout, setTodaysWorkout] = useState({});
   const { userId } = useContext(UserContext);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
-  useEffect(() => {
-    getExercises();
-  }, []);
+  // useEffect(() => {
+  //   getExercises();
+  //   console.log(exerciseList);
+  // }, []);
 
   useEffect(() => {
     console.log(selectedExercise);
   }, [selectedExercise]);
 
-  const getExercises = async () => {
-    try {
-      const exData = await fetch("http://localhost:3001/exercise");
-      const exList = await exData.json();
-      setExerciseList(exList);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const getExercises = async () => {
+  //   try {
+  //     const exData = await fetch("http://localhost:3001/exercise");
+  //     const exList = await exData.json();
+  //     setExerciseList(exList);
+  //     console.log(exerciseList);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleSelection = (e) => {
     const selection = exerciseList.find(
@@ -42,7 +46,10 @@ export default function Today() {
         {selectedExercise ? (
           <>
             <h4>{selectedExercise["exercise_name"].toUpperCase()}</h4>
-            <InfoSubmit />
+            <InfoSubmit
+              currentSelection={selectedExercise}
+              unselect={handleUnselection}
+            />
             <p onClick={handleUnselection}>back</p>
           </>
         ) : (

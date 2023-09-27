@@ -1,39 +1,43 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import ExerciseContext from "../contexts/ExerciseContext";
 
 export default function History() {
-  const [exerciseList, setExerciseList] = useState([]);
+  const { exerciseList } = useContext(ExerciseContext);
   const { userId } = useContext(UserContext);
   const [selectedHistory, setSelectedHistory] = useState(null);
   const [displayHistory, setDisplayHistory] = useState(null);
 
   useEffect(() => {
-    getExercises();
+    console.log(exerciseList);
+    console.log(selectedHistory);
   }, []);
 
   useEffect(() => {
     getHistory();
-    console.log(selectedHistory);
+    console.log("fetch" + selectedHistory);
   }, [selectedHistory]);
 
-  const getExercises = async () => {
-    try {
-      const exData = await fetch("http://localhost:3001/exercise");
-      const exList = await exData.json();
-      setExerciseList(exList);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const getExercises = async () => {
+  //   try {
+  //     const exData = await fetch("http://localhost:3001/exercise");
+  //     const exList = await exData.json();
+  //     setExerciseList(exList);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleSelection = (e) => {
     const selection = exerciseList.find(
       (ex) => ex["exercise_name"] === e.target.className
     );
     setSelectedHistory(selection);
+    console.log(selectedHistory);
   };
 
   const handleUnselection = () => {
+    setDisplayHistory(null);
     setSelectedHistory(null);
   };
 
@@ -52,7 +56,7 @@ export default function History() {
     }
   };
 
-  if (!selectedHistory) {
+  if (!displayHistory) {
     return (
       <>
         <h3>Select an exercise to show your progress</h3>
