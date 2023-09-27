@@ -5,29 +5,12 @@ import ExerciseContext from "../contexts/ExerciseContext";
 
 export default function Today() {
   const { exerciseList } = useContext(ExerciseContext);
-  // const [todaysWorkout, setTodaysWorkout] = useState({});
   const { userId } = useContext(UserContext);
   const [selectedExercise, setSelectedExercise] = useState(null);
-
-  // useEffect(() => {
-  //   getExercises();
-  //   console.log(exerciseList);
-  // }, []);
 
   useEffect(() => {
     console.log(selectedExercise);
   }, [selectedExercise]);
-
-  // const getExercises = async () => {
-  //   try {
-  //     const exData = await fetch("http://localhost:3001/exercise");
-  //     const exList = await exData.json();
-  //     setExerciseList(exList);
-  //     console.log(exerciseList);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const handleSelection = (e) => {
     const selection = exerciseList.find(

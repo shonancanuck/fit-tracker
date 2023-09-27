@@ -1,17 +1,12 @@
-import React, { useState, useContext } from "react";
-import UserContext from "../contexts/UserContext";
+import React, { useContext } from "react";
 import DisplayContext from "../contexts/DisplayContext";
-import ExerciseContext from "../contexts/ExerciseContext";
 
 import Recent from "./Recent";
 import History from "./History";
 import Today from "./Today";
 
 export default function Dashboard() {
-  // const { userId, setUserId, username, setUsername, loggedIn, setLoggedIn } =
-  //   useContext(UserContext);
   const { display, setDisplay } = useContext(DisplayContext);
-  const { exerciseList, setExerciseList } = useContext(ExerciseContext);
 
   const changeDisplay = (str) => {
     setDisplay(str);

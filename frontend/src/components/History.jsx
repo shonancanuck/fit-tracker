@@ -9,24 +9,9 @@ export default function History() {
   const [displayHistory, setDisplayHistory] = useState(null);
 
   useEffect(() => {
-    console.log(exerciseList);
-    console.log(selectedHistory);
-  }, []);
-
-  useEffect(() => {
     getHistory();
-    console.log("fetch" + selectedHistory);
+    console.log("get history " + selectedHistory);
   }, [selectedHistory]);
-
-  // const getExercises = async () => {
-  //   try {
-  //     const exData = await fetch("http://localhost:3001/exercise");
-  //     const exList = await exData.json();
-  //     setExerciseList(exList);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const handleSelection = (e) => {
     const selection = exerciseList.find(

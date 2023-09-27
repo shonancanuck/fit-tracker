@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
-  const { userId, setUserId, username, setUsername, loggedIn, setLoggedIn } =
+  const { userId, setUserId, username, setUsername, setLoggedIn } =
     useContext(UserContext);
 
   const handleUsernameChange = (e) => {

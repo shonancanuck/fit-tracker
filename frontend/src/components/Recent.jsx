@@ -4,11 +4,9 @@ import UserContext from "../contexts/UserContext";
 export default function Recent() {
   const { userId } = useContext(UserContext);
   const [workoutData, setWorkoutData] = useState([]);
-  const [lastWorkout, setLastWorkout] = useState([]);
 
   useEffect(() => {
     getRecentHistory();
-    setLastWorkout(() => displayData);
   }, []);
 
   const getRecentHistory = async () => {

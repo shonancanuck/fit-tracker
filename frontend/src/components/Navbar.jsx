@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import UserContext from "../contexts/UserContext";
+
 import DisplayContext from "../contexts/DisplayContext";
+import UserContext from "../contexts/UserContext";
 
 export default function Navbar() {
-  const { username, userId, loggedIn, setLoggedIn } = useContext(UserContext);
-  const { display, setDisplay } = useContext(DisplayContext);
+  const { setDisplay } = useContext(DisplayContext);
+  const { setLoggedIn } = useContext(UserContext);
 
   const handleHome = () => {
     setDisplay("home");
@@ -47,16 +48,7 @@ export default function Navbar() {
             </li>
           </ul>
         </nav>
-        {/* <div>
-          {new Date().toDateString()}
-          {username}
-        </div> */}
       </div>
     </header>
-    //   <h3>FitTracker</h3>
-    //   <h5>{new Date().toDateString()}</h5>
-    //   <h5>{username}</h5>
-    //   <h5 onClick={handleLogout}>Log out</h5>
-    // </nav>
   );
 }
