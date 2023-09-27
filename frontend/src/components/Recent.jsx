@@ -15,6 +15,7 @@ export default function Recent() {
     );
     const recentHistory = await recentData.json();
     console.log(recentHistory);
+    recentHistory.sort((a, b) => a["exercise_id"] - b["exercise_id"]);
     setWorkoutData(() => recentHistory);
   };
 
