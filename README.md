@@ -17,7 +17,7 @@ To get started with FitTracker, follow the steps below:
 1. Clone the FitTracker repository from GitHub:
 
    ```
-   git clone https://github.com/shonancanuck/FitTracker.git
+   git clone https://github.com/shonancanuck/fit-tracker.git
    ```
 
 2. Start the Frontend
