@@ -15,6 +15,7 @@ export default function Dashboard() {
   useEffect(() => {
     console.log("set workout");
     setTodaysWorkout(createBaseWorkout());
+    // sometimes workout fails to create. Issue seems fixed, but requires further testing
     console.log(todaysWorkout);
   }, []);
 
