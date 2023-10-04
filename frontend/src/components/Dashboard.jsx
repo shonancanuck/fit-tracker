@@ -14,13 +14,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log("set workout");
-    setTodaysWorkout(createBaseWorkout());
-    // sometimes workout fails to create. Issue seems fixed, but requires further testing
+    createStartingWorkout();
     console.log(todaysWorkout);
-  }, []);
+  }, [exerciseList]);
 
-  const createBaseWorkout = () =>
-    exerciseList.map((ex) => {
+  const createStartingWorkout = () => {
+    const baseArray = exerciseList.map((ex) => {
       return {
         exName: ex["exercise_name"],
         exId: ex["exercise_id"],
@@ -29,6 +28,9 @@ export default function Dashboard() {
         weight: 0,
       };
     });
+    console.log(baseArray);
+    setTodaysWorkout(baseArray);
+  };
 
   const changeDisplay = (str) => {
     setDisplay(str);
