@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import UserContext from "../contexts/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import UserContext from '../contexts/UserContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const { userId, setUserId, username, setUsername, setLoggedIn } =
     useContext(UserContext);
 
@@ -18,29 +18,29 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit login");
+    console.log('submit login');
     console.log(username, userId);
     try {
-      const response = await fetch("http://localhost:3001/user/login", {
-        method: "POST",
-        credentials: "include",
+      const response = await fetch('http://localhost:3001/user/login', {
+        method: 'POST',
+        credentials: 'include',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password }),
       });
       if (response.ok) {
-        console.log("Login successful!");
+        console.log('Login successful!');
         console.log(response);
         const userInfo = await response.json();
         console.log(userInfo);
         setUserId(userInfo.userId);
         setUsername(userInfo.username);
         setLoggedIn(true);
-        navigate("/");
+        navigate('/');
       } else {
         console.log(response);
-        console.log("Login unsuccessful");
+        console.log('Login unsuccessful');
       }
     } catch (err) {
       console.error(err);
@@ -48,7 +48,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="form-box">
       <h3>Log in to an account</h3>
       <form onSubmit={handleSubmit}>
         <div>
