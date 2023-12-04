@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import UserContext from "../contexts/UserContext";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import UserContext from '../contexts/UserContext';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Register() {
   const navigate = useNavigate();
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const { setUserId, username, setUsername, setLoggedIn } =
     useContext(UserContext);
 
@@ -20,26 +20,26 @@ export default function Register() {
     e.preventDefault();
     try {
       console.log(username, password);
-      const response = await fetch("http://localhost:3001/user/register", {
-        method: "POST",
-        credentials: "include",
+      const response = await fetch('http://localhost:3001/user/register', {
+        method: 'POST',
+        credentials: 'include',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password }),
       });
       console.log(response);
       if (response.ok) {
-        console.log("Registration successful!");
+        console.log('Registration successful!');
         const userInfo = await response.json();
         console.log(userInfo);
         setUserId(userInfo.id);
         setUsername(userInfo.username);
         setLoggedIn(true);
-        navigate("/");
+        navigate('/');
       } else {
         console.log(response);
-        console.log("Registration unsuccessful");
+        console.log('Registration unsuccessful');
       }
     } catch (err) {
       console.error(err);
@@ -47,7 +47,7 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="form-box">
       <h3>Register for an account</h3>
       <form onSubmit={handleSubmit}>
         <div>
